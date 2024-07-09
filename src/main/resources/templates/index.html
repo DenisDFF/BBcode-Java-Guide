@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список постов</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="my-4">Список постов</h2>
+    <div th:each="post : ${posts}">
+        <h3 th:text="${post.name}">Имя поста</h3>
+        <p class="description" th:utext="${post.description}">Описание поста</p>
+        <hr>
+    </div>
+</div>
+
+<script>
+        function linkify(text) {
+            var urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+            return text.replace(urlPattern, '<a href="$1" target="_blank">$1</a>');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var descriptions = document.querySelectorAll('.description');
+            descriptions.forEach(function(desc) {
+                desc.innerHTML = linkify(desc.innerHTML);
+            });
+        });
+    </script>
+
+</body>
+</html>
